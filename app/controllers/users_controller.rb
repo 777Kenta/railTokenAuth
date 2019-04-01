@@ -49,15 +49,18 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
-      "message": "User successfully updated",
-      "recipe": [
-        {
-          "nickname": @user.nickname,
-          "comment":  @user.comment
-        }
-      ]
+      user_data = {
+        "message": "User successfully updated",
+        "recipe": [
+          {
+            "nickname": @user.nickname,
+            "comment":  @user.comment
+          }
+        ]
+      }
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render :json => user_data
+      # render json: @user.errors, status: :unprocessable_entity
     end
   end
 
